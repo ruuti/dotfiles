@@ -1,0 +1,11 @@
+import = ["~/.config/alacritty/alacritty-theme/themes/gruvbox_dark.toml"]
+
+[font]
+size = 15
+
+[window]
+decorations = "buttonless"
+
+[window.padding]
+x = 5
+y = 5
