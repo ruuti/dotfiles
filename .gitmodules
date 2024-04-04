@@ -1,3 +1,6 @@
 [submodule "alacritty/alacritty-theme"]
 	path = alacritty/alacritty-theme
 	url = git@github.com:alacritty/alacritty-theme.git
+[submodule "nvim"]
+	path = nvim
+	url = git@github.com:ruuti/nvim-kick.git

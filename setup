@@ -3,3 +3,4 @@
 export XDG_CONFIG_HOME="$HOME"/.config
 
 ln -s "$PWD/alacritty/" "$XDG_CONFIG_HOME"
+ln -s "$PWD/nvim/" "$XDG_CONFIG_HOME"
