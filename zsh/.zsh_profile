@@ -1,3 +1,20 @@
-alias dev="cd ~/dev"
-alias pers="cd ~/pers"
 alias vim="nvim"
+
+# autocompletion for cd aliases
+typeset -A cd_aliases
+cd_aliases=(
+  [dev]="$HOME/dev"
+  [pers]="$HOME/pers"
+)
+
+for k in "${(@k)cd_aliases}"; do
+  function $k() {
+    cd "$cd_aliases[$0]/$1"
+  }
+
+  function _$k() {
+    ((CURRENT == 2)) && _files -/ -W $cd_aliases[${0:1}]
+  }
+
+  compdef _$k $k
+done
