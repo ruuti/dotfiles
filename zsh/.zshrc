@@ -65,12 +65,7 @@ plugins=(git docker docker-compose)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-alias dev="cd ~/dev"
-alias pers="cd ~/pers"
-alias vim="nvim"
-
-export GOPRIVATE=github.com/spaceship-fspl
+source ~/.zsh_profile
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
