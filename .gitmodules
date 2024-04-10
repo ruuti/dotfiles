@@ -3,4 +3,4 @@
 	url = git@github.com:alacritty/alacritty-theme.git
 [submodule "nvim"]
 	path = nvim
-	url = git@github.com:ruuti/nvim-kick.git
+	url = git@github.com:ruuti/nvim.git
