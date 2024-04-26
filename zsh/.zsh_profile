@@ -1,4 +1,7 @@
 alias vim="nvim"
+alias v="nvim"
+
+alias notes="cd $NOTESDIR"
 
 # autocompletion for cd aliases
 typeset -A cd_aliases
