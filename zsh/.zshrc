@@ -64,6 +64,8 @@ plugins=(git docker docker-compose ripgrep)
 
 source $ZSH/oh-my-zsh.sh
 
+export NOTESDIR="$HOME/Vault"
+
 # User configuration
 source ~/.zsh_profile
 
