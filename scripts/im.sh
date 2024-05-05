@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Interface Mode controls alacritty and nvim dark/light mode either by using
 # system setting or passed argument.
 # 
@@ -27,10 +26,8 @@ echo "setting $MODE mode"
 # overwrite mode settings in configs
 if [[ "$MODE" = "dark" ]]; then
   sed -i.imbak "s/${LIGHT_THEME}/${DARK_THEME}/" $ALACRITTY_CONF
-  sed -i.imbak 's/background=light/background=dark/' "$VIMCONF"
 else
   sed -i.imbak "s/${DARK_THEME}/${LIGHT_THEME}/" $ALACRITTY_CONF
-  sed -i.imbak 's/background=dark/background=light/' "$VIMCONF"
 fi
 
 # if (n)vim running in tmux, set background
