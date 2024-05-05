@@ -5,13 +5,14 @@ make brew-install
 ```
 
 ```
-./setup
+sudo ./setup
 ```
+sudo is needed as we write a symbolic link to `/usr/local/bin/`
 
 ```
 source ~/.zshrc && source ~/.zshenv
 ```
 
 ```
-make scripts-install 
+make brew-install 
 ```
