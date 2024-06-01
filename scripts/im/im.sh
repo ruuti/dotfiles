@@ -31,8 +31,8 @@ else
 fi
 
 # if (n)vim running in tmux, set background
-tmux list-panes -a -F '#{pane_id} #{pane_current_command}' |
+/opt/homebrew/bin/tmux list-panes -a -F '#{pane_id} #{pane_current_command}' |
   grep vim |
   cut -d ' ' -f 1 |
-  xargs -I PANE tmux send-keys -t PANE ESCAPE \
+  xargs -I PANE /opt/homebrew/bin/tmux send-keys -t PANE ESCAPE \
     ":set background=${MODE}" ENTER
