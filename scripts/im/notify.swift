@@ -3,7 +3,6 @@
 // Compile with:
 // swiftc notify.swift -o /usr/local/bin/im-notify
 // Most credit goes to https://github.com/mnewt/dotemacs/blob/master/bin/dark-mode-notifier.swift
-// Source: https://gist.github.com/bouk/5046a9e9cf2424091070b14b8f3333ea
 
 // Usage: ./notify.swift bash -c im
 import Cocoa
@@ -11,10 +10,10 @@ import Cocoa
 @discardableResult
 func shell(_ args: [String]) -> Int32 {
     let task = Process()
-    let isDark = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
-    var env = ProcessInfo.processInfo.environment
-    env["DARKMODE"] = isDark ? "1" : "0"
-    task.environment = env
+    // let isDark = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
+    //var env = ProcessInfo.processInfo.environment
+    //env["DARKMODE"] = isDark ? "1" : "0"
+    //task.environment = env
     task.launchPath = "/usr/bin/env"
     task.arguments = args
     task.standardError = FileHandle.standardError
