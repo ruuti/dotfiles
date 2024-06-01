@@ -6,7 +6,6 @@
 // Source: https://gist.github.com/bouk/5046a9e9cf2424091070b14b8f3333ea
 
 // Usage: ./notify.swift bash -c im
-// TODO: add launchd script
 import Cocoa
 
 @discardableResult
