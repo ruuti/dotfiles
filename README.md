@@ -13,5 +13,5 @@ source ~/.zshrc && source ~/.zshenv
 ```
 
 ```
-make scripts-install
+make scripts-install 
 ```
