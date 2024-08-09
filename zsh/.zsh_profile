@@ -21,3 +21,6 @@ for k in "${(@k)cd_aliases}"; do
 
   compdef _$k $k
 done
+
+# pgcli \e to launch nvim
+export EDITOR=nvim
