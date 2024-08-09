@@ -80,7 +80,7 @@ autoload -U +X bashcompinit && bashcompinit
 # terraform autocomplete
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$HOME/bin:$PATH"
 
 # ---- FZF -----
 
