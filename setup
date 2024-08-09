@@ -10,3 +10,7 @@ ln -s "$PWD/zsh/.zshrc" "$HOME"
 ln -s "$PWD/zsh/.zsh_profile" "$HOME"
 
 ln -s "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault" "$HOME"
+
+mkdir "$HOME"/bin
+
+cp "$PWD/scripts/pbsql/pbsql.sh" "$HOME"/bin/pbsql
