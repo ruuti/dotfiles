@@ -18,3 +18,31 @@ cp "$PWD/scripts/pbsql/pbsql.sh" "$HOME"/bin/pbsql
 # create pgcli config directory and link config
 mkdir -p "$HOME/.config/pgcli"
 ln -s "$PWD/pgcli/config" "$HOME/.config/pgcli/config"
+
+# link .gitconfig
+# Step 1: Remove current "$HOME/.gitconfig" if it exists and it's not a
+# symbolic link
+GITCONFIG_HOME="$HOME/.gitconfig"
+GITCONFIG_PWD="$PWD/.gitconfig"
+
+if [ -e "$GITCONFIG_HOME" ] && [ ! -L "$GITCONFIG_HOME" ]; then
+    echo "Removing $GITCONFIG_HOME as it exists and is not a symbolic link."
+    rm "$GITCONFIG_HOME"
+fi
+
+# Step 2: Unlink "$HOME/.gitconfig" if it's not the same as "$PWD/.gitconfig"
+# If it's the same, create a symbolic link from "$PWD/.gitconfig"
+# to "$HOME/.gitconfig"
+if [ -L "$GITCONFIG_HOME" ]; then
+    LINKED_TO=$(readlink "$GITCONFIG_HOME")
+    if [ "$LINKED_TO" != "$GITCONFIG_PWD" ]; then
+        echo "Unlinking $GITCONFIG_HOME as it points to $LINKED_TO."
+        unlink "$GITCONFIG_HOME"
+    fi
+fi
+
+# If "$HOME/.gitconfig" doesn't exist or was unlinked, create the symbolic link
+if [ ! -L "$GITCONFIG_HOME" ] && [ ! -e "$GITCONFIG_HOME" ]; then
+    echo "Creating symbolic link from $GITCONFIG_PWD to $GITCONFIG_HOME."
+    ln -s "$GITCONFIG_PWD" "$GITCONFIG_HOME"
+fi
