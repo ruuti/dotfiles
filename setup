@@ -18,3 +18,6 @@ cp "$PWD/scripts/pbsql/pbsql.sh" "$HOME"/bin/pbsql
 # create pgcli config directory and link config
 mkdir -p "$HOME/.config/pgcli"
 ln -s "$PWD/pgcli/config" "$HOME/.config/pgcli/config"
+
+# link .gitconfig
+ln -s "$PWD/.gitconfig" "$HOME"

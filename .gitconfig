@@ -1,0 +1,16 @@
+[gpg]
+	format = ssh
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[commit]
+	gpgSign = true
+[diff]
+	tool = nvimdiff
+[difftool]
+	prompt = false
+[credential]
+	helper = osxkeychain
+[include]
+    path = ~/.gitconfig-local

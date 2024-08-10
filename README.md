@@ -1,5 +1,18 @@
 # Usage
 
+## Configure git
+
+Create `~/.gitconfig-local` with the following content:
+
+```
+[user]
+  name = xxx
+  email = xxx
+...
+```
+
+## Install
+
 ```
 make brew-install 
 ```
