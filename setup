@@ -1,48 +1,40 @@
 #!/bin/bash
 
-export XDG_CONFIG_HOME="$HOME"/.config
+export XDG_CONFIG_HOME="$HOME/.config"
 
-ln -s "$PWD/alacritty/" "$XDG_CONFIG_HOME"
-ln -s "$PWD/nvim/" "$XDG_CONFIG_HOME"
-ln -s "$PWD/tmux/" "$XDG_CONFIG_HOME"
+mkdir -p "$XDG_CONFIG_HOME"
 
-ln -s "$PWD/zsh/.zshrc" "$HOME"
-ln -s "$PWD/zsh/.zsh_profile" "$HOME"
+# function to create or replace symlink
+create_symlink() {
+    source_dir=$1
+    target_dir=$2
 
-ln -s "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault" "$HOME"
+    if [ -L "$target_dir" ]; then
+        rm "$target_dir"
+    elif [ -e "$target_dir" ]; then
+        echo "Error: $target_dir already exists and is not a symlink"
+        exit 1
+    fi
+    ln -s "$source_dir" "$target_dir"
+}
 
-mkdir "$HOME"/bin
+create_symlink "$PWD/alacritty" "$XDG_CONFIG_HOME/alacritty"
+create_symlink "$PWD/nvim" "$XDG_CONFIG_HOME/nvim"
+create_symlink "$PWD/tmux" "$XDG_CONFIG_HOME/tmux"
 
-cp "$PWD/scripts/pbsql/pbsql.sh" "$HOME"/bin/pbsql
+create_symlink "$PWD/zsh/.zshrc" "$HOME/.zshrc"
+create_symlink "$PWD/zsh/.zsh_profile" "$HOME/.zsh_profile"
+create_symlink "$PWD/.gitconfig" "$HOME/.gitconfig"
+
+# obsidian 
+create_symlink "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault" "$HOME/Vault"
+
+# setup pbsql
+mkdir -p "$HOME/bin"
+create_symlink "$PWD/scripts/pbsql/pbsql.sh" "$HOME/bin/pbsql"
 
 # create pgcli config directory and link config
-mkdir -p "$HOME/.config/pgcli"
-ln -s "$PWD/pgcli/config" "$HOME/.config/pgcli/config"
+mkdir -p "$XDG_CONFIG_HOME/pgcli"
+create_symlink "$PWD/pgcli/config" "$XDG_CONFIG_HOME/pgcli/config"
 
-# link .gitconfig
-# Step 1: Remove current "$HOME/.gitconfig" if it exists and it's not a
-# symbolic link
-GITCONFIG_HOME="$HOME/.gitconfig"
-GITCONFIG_PWD="$PWD/.gitconfig"
-
-if [ -e "$GITCONFIG_HOME" ] && [ ! -L "$GITCONFIG_HOME" ]; then
-    echo "Removing $GITCONFIG_HOME as it exists and is not a symbolic link."
-    rm "$GITCONFIG_HOME"
-fi
-
-# Step 2: Unlink "$HOME/.gitconfig" if it's not the same as "$PWD/.gitconfig"
-# If it's the same, create a symbolic link from "$PWD/.gitconfig"
-# to "$HOME/.gitconfig"
-if [ -L "$GITCONFIG_HOME" ]; then
-    LINKED_TO=$(readlink "$GITCONFIG_HOME")
-    if [ "$LINKED_TO" != "$GITCONFIG_PWD" ]; then
-        echo "Unlinking $GITCONFIG_HOME as it points to $LINKED_TO."
-        unlink "$GITCONFIG_HOME"
-    fi
-fi
-
-# If "$HOME/.gitconfig" doesn't exist or was unlinked, create the symbolic link
-if [ ! -L "$GITCONFIG_HOME" ] && [ ! -e "$GITCONFIG_HOME" ]; then
-    echo "Creating symbolic link from $GITCONFIG_PWD to $GITCONFIG_HOME."
-    ln -s "$GITCONFIG_PWD" "$GITCONFIG_HOME"
-fi
+echo "Setup done"
