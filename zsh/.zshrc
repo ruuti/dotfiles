@@ -80,9 +80,13 @@ autoload -U +X bashcompinit && bashcompinit
 # terraform autocomplete
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
-export PATH="/opt/homebrew/opt/libpq/bin:$HOME/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$HOME/bin:$HOME/.local/bin:$PATH"
 
 # ---- FZF -----
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
+
+# Auto-completion for make
+zstyle ':completion:*:*:make:*' tag-order 'targets'
+autoload -U compinit && compinit
