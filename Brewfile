@@ -1,6 +1,7 @@
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "yoheimuta/protolint"
+brew "docker"
 brew "fzf"
 brew "gh"
 brew "gnupg"
