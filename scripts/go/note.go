@@ -31,10 +31,6 @@ func run() error {
 	s := reg.ReplaceAllString(input, " ")
 	fileName := strings.ToLower(s)
 
-	if err != nil {
-		return fmt.Errorf("creating a slug: %s", err)
-	}
-
 	notesDir := os.Getenv("NOTESDIR")
 	destination := fmt.Sprintf("%s/0-inbox/%s.md", notesDir, fileName)
 
