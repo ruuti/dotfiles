@@ -90,3 +90,5 @@ eval "$(fzf --zsh)"
 # Auto-completion for make
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 autoload -U compinit && compinit
+
+set -o vi
