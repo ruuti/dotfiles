@@ -30,9 +30,11 @@ else
   sed -i.imbak "s/${DARK_THEME}/${LIGHT_THEME}/" $ALACRITTY_CONF
 fi
 
+TMUX_PATH=$(command -v tmux)
+
 # if (n)vim running in tmux, set background
-/opt/homebrew/bin/tmux list-panes -a -F '#{pane_id} #{pane_current_command}' |
+"$TMUX_PATH" list-panes -a -F '#{pane_id} #{pane_current_command}' |
   grep vim |
   cut -d ' ' -f 1 |
-  xargs -I PANE /opt/homebrew/bin/tmux send-keys -t PANE ESCAPE \
+  xargs -I PANE "$TMUX_PATH" send-keys -t PANE ESCAPE \
     ":set background=${MODE}" ENTER

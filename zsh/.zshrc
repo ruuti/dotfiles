@@ -92,3 +92,7 @@ zstyle ':completion:*:*:make:*' tag-order 'targets'
 autoload -U compinit && compinit
 
 set -o vi
+
+if [ -z "$TMUX" ] && [ "$TERM" = "alacritty" ]; then
+  tmux attach || exec tmux new-session && exit;
+fi
