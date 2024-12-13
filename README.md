@@ -8,6 +8,7 @@ Create `~/.gitconfig-local` with the following content:
 [user]
   name = xxx
   email = xxx
+  signingkey = xxx
 ...
 ```
 
@@ -28,3 +29,7 @@ source ~/.zshrc && source ~/.zshenv
 ```
 make scripts-install 
 ```
+
+## Modifier Keys
+
+- Caps Lock -> Escape
