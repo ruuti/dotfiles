@@ -1,10 +1,9 @@
-import = ["~/.config/alacritty/alacritty-theme/themes/gruvbox_dark.toml"]
-
 [font]
 size = 15
 
 [window]
 decorations = "buttonless"
+startup_mode = "Maximized"
 
 [window.padding]
 x = 5
