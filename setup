@@ -37,4 +37,7 @@ create_symlink "$PWD/scripts/pbsql/pbsql.sh" "$HOME/bin/pbsql"
 mkdir -p "$XDG_CONFIG_HOME/pgcli"
 create_symlink "$PWD/pgcli/config" "$XDG_CONFIG_HOME/pgcli/config"
 
+# pgformatter
+create_symlink "$PWD/.pg_format" "$HOME/.pg_format"
+
 echo "Setup done"
