@@ -21,6 +21,7 @@ create_symlink() {
 create_symlink "$PWD/alacritty" "$XDG_CONFIG_HOME/alacritty"
 create_symlink "$PWD/nvim" "$XDG_CONFIG_HOME/nvim"
 create_symlink "$PWD/tmux" "$XDG_CONFIG_HOME/tmux"
+create_symlink "$PWD/yamlfmt" "$XDG_CONFIG_HOME/yamlfmt"
 
 create_symlink "$PWD/zsh/.zshrc" "$HOME/.zshrc"
 create_symlink "$PWD/zsh/.zsh_profile" "$HOME/.zsh_profile"
