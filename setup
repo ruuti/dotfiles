@@ -5,15 +5,25 @@ export XDG_CONFIG_HOME="$HOME/.config"
 mkdir -p "$XDG_CONFIG_HOME"
 
 # function to create or replace symlink
+# Usage: create_symlink <source> <target> [delete_existing]
+#   source: path to the source file/directory
+#   target: path where the symlink should be created
+#   delete_existing: optional boolean (default: false) - if true, deletes target if it exists and is not a symlink
 create_symlink() {
     source_dir=$1
     target_dir=$2
+    delete_existing=${3:-false}
 
     if [ -L "$target_dir" ]; then
         rm "$target_dir"
     elif [ -e "$target_dir" ]; then
-        echo "Error: $target_dir already exists and is not a symlink"
-        exit 1
+        if [ "$delete_existing" = "true" ]; then
+            echo "Removing existing file: $target_dir"
+            rm "$target_dir"
+        else
+            echo "Error: $target_dir already exists and is not a symlink"
+            exit 1
+        fi
     fi
     ln -s "$source_dir" "$target_dir"
 }
@@ -27,12 +37,20 @@ create_symlink "$PWD/zsh/.zshrc" "$HOME/.zshrc"
 create_symlink "$PWD/zsh/.zsh_profile" "$HOME/.zsh_profile"
 create_symlink "$PWD/.gitconfig" "$HOME/.gitconfig"
 
+# setup glow config
+mkdir -p "$HOME/Library/Preferences/glow"
+create_symlink "$PWD/glow/glow.yml" "$HOME/Library/Preferences/glow/glow.yml" "true"
+
 # obsidian 
 create_symlink "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault" "$HOME/Vault"
 
 # setup pbsql
 mkdir -p "$HOME/bin"
 create_symlink "$PWD/scripts/pbsql/pbsql.sh" "$HOME/bin/pbsql"
+
+# setup pbfile
+mkdir -p "$HOME/bin"
+create_symlink "$PWD/scripts/pbfile/pbfile.sh" "$HOME/bin/pbfile"
 
 # create pgcli config directory and link config
 mkdir -p "$XDG_CONFIG_HOME/pgcli"
