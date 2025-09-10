@@ -80,7 +80,11 @@ autoload -U +X bashcompinit && bashcompinit
 # terraform autocomplete
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
-export PATH="/opt/homebrew/opt/libpq/bin:$HOME/bin:$HOME/.local/bin:$PATH"
+# set GOBIN and GOHOME
+export GOHOME="$HOME/go"
+export GOBIN="$GOHOME/bin"
+
+export PATH="/opt/homebrew/opt/libpq/bin:$HOME/bin:$HOME/.local/bin:$GOBIN:$PATH"
 
 # ---- FZF -----
 
