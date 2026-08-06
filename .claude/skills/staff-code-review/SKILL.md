@@ -14,7 +14,7 @@ Review like a staff engineer signing off on a change that will page them at 3am 
 ## Process
 
 1. **Establish real scope.**
-   - If given a GitHub PR URL (`$ARGUMENTS`, e.g. `https://github.com/org/repo/pull/123`): run `gh pr view $ARGUMENTS --json title,body,baseRefName,commits,files` for context and `gh pr diff $ARGUMENTS` for the diff.
+   - If given a GitHub PR URL (`$ARGUMENTS`, e.g. `https://github.com/org/repo/pull/123`): run `gh pr view $ARGUMENTS --json title,body,baseRefName,commits,files` for context and `gh pr diff $ARGUMENTS` for the diff. Use `gh` read-only here — never `gh pr comment`, `gh pr review`, or anything else that posts to GitHub (see Guardrails).
    - Otherwise, diff the current working tree (`git diff` against the base branch) or the files given.
    Then read enough of the surrounding code — not just the changed hunks — to understand the actual blast radius: callers, related tests, config, migrations. A review that only reads the diff misses context-dependent bugs. If the project has a test suite, linter, or build, run them — don't take "it compiles" or "tests pass" on faith when you can check directly.
 2. **Check for prior art first.** Before flagging something as wrong, check whether it matches an existing pattern elsewhere in the codebase, or was a deliberate tradeoff (check commit messages, PR description, comments). Don't re-litigate decisions that were made on purpose for a good reason — raise them as a question, not a blocker.
@@ -36,6 +36,7 @@ Review like a staff engineer signing off on a change that will page them at 3am 
 
 ## Guardrails
 
+- **Never post anything to GitHub.** Don't run `gh pr comment`, `gh pr review`, `gh pr merge`, or any other command that writes to the PR — no exceptions, even if asked to "leave comments" or "approve it." Output the full review as text in the response; the human posts it manually after reading it.
 - Don't flag anything a linter or formatter already enforces (whitespace, import order, etc.) — assume tooling owns that.
 - Don't invent requirements the change wasn't trying to meet. Review against its actual goal, not an idealized one.
 - Don't pad the review by restating what the diff does — assume the reader can read the diff; only write about what's *wrong* or *worth deciding*.
