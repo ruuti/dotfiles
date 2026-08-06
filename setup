@@ -59,4 +59,21 @@ create_symlink "$PWD/pgcli/config" "$XDG_CONFIG_HOME/pgcli/config"
 # pgformatter
 create_symlink "$PWD/.pg_format" "$HOME/.pg_format"
 
+# claude code skills — merge any pre-existing local skills into the repo once, then symlink
+mkdir -p "$HOME/.claude"
+if [ -d "$HOME/.claude/skills" ] && [ ! -L "$HOME/.claude/skills" ]; then
+    echo "Merging existing ~/.claude/skills into dotfiles repo..."
+    for skill_dir in "$HOME/.claude/skills"/*/; do
+        [ -d "$skill_dir" ] || continue
+        name=$(basename "$skill_dir")
+        if [ -e "$PWD/.claude/skills/$name" ]; then
+            echo "Error: skill '$name' exists both locally and in the dotfiles repo — resolve manually, then re-run setup"
+            exit 1
+        fi
+        mv "$skill_dir" "$PWD/.claude/skills/$name"
+    done
+    rmdir "$HOME/.claude/skills"
+fi
+create_symlink "$PWD/.claude/skills" "$HOME/.claude/skills"
+
 echo "Setup done"
